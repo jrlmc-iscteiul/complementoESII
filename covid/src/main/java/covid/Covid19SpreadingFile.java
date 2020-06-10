@@ -1,6 +1,7 @@
 package covid;
 
 public class Covid19SpreadingFile {
+	
 	private String fileTimestamp;
 	private String fileName;
 	private String fileTag;
