@@ -2,6 +2,8 @@ package covid;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,10 +35,19 @@ public class GetDataFromGit {
 	
 	public void useGitRepository() throws InvalidRemoteException, TransportException, GitAPIException, IOException {
 		
-		//Git git = Git.cloneRepository().setURI("https://github.com/vbasto-iscte/ESII1920.git").setDirectory(new File("/cloneESII")).call();
+		Git git;
+		System.out.println();
 		
-		Git git = Git.open(new File("/cloneESII"));
-		git.checkout();
+		File file =  new File("/cloneESII");
+		
+		if(file.isDirectory() && !file.exists())
+			git = Git.cloneRepository().setURI("https://github.com/vbasto-iscte/ESII1920.git").setDirectory(file).call();
+		else {
+			git = Git.open(new File("/cloneESII"));
+			git.pull();
+			git.checkout();
+		}
+		
 		Repository repository = git.getRepository();
 		
 		List<Ref> listTags = git.tagList().call();
@@ -58,38 +69,31 @@ public class GetDataFromGit {
                                                     
              try (RevWalk revWalk = new RevWalk(repository)) {
                  
-            	 RevCommit commit = revWalk.parseCommit(tagFile);
-            	         	 
-            	
-                         
+            	 RevCommit commit = revWalk.parseCommit(tagFile); 
                  RevTree tree = commit.getTree();
-                // System.out.println("Having tree: " + tree + "\n");
-
-                 // now try to find a specific file
+               
                  try (TreeWalk treeWalk = new TreeWalk(repository)) {
                      treeWalk.addTree(tree);
                      treeWalk.setRecursive(true);
                      treeWalk.setFilter(PathFilter.create("covid19spreading.rdf"));
                      
-                     if (!treeWalk.next()) {
+                     if (!treeWalk.next()) 
                          throw new IllegalStateException("Did not find expected file 'covid19spreading.rdf'");
-                     }
-                    
+                                         
                      ObjectId objectId = treeWalk.getObjectId(0);
-                     
                      listFiles.add(objectId); 
-                     
-                     ObjectLoader loader = repository.open(objectId);
-
-                   //  String name = ref.getName().replace("refs/tags/", "");
-                     
+                                       
                      fileToTable = new Covid19SpreadingFile(commit.getAuthorIdent().getWhen().toLocaleString().toString(),"covid19spreading.rdf", ref.getName().replace("refs/tags/", ""), commit.getFullMessage(), "idk too");
                      listCovid19SpreadingFile.add(fileToTable);
                      
-                     table.updateHTMLFile(new File("tableCovid.html"), listCovid19SpreadingFile);
-                   
-                     //System.out.println(fileToTable.toString())
-                  
+                     table.updateHTMLFile(new File("tableCovid.html"), listCovid19SpreadingFile);  
+                     
+                     try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                  }
              }
          }       

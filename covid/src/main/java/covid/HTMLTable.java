@@ -1,18 +1,14 @@
 package covid;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class HTMLTable {
 	
-	
-
 	public String createLine(Covid19SpreadingFile file) {
 		StringBuilder sb = new StringBuilder();
 				
@@ -24,15 +20,7 @@ public class HTMLTable {
 		
 		 return sb.toString();
 	}
-	
-	public void createFinalOfHTML() {
-		StringBuilder sb = new StringBuilder();
 		
-		sb.append("</tbody> \n");
-		sb.append("</table> \n");
-	}
-	
-	
 	public void updateHTMLFile(File sourceFile, List<Covid19SpreadingFile> list) throws IOException {
 		
 		File destFile = new File("tableCovid2.html");
@@ -75,34 +63,6 @@ public class HTMLTable {
 			
 		} catch (IOException ioe) {
 			System.out.println(ioe);
-		}
-  			
-	}
-	
-	public void writeToFile(File file, Covid19SpreadingFile line) throws IOException {
-		
-		FileWriter fw = new FileWriter(file);
-		PrintWriter pw = new PrintWriter(file);
-	}
-	
-	
-	public static void main(String[] args) {
-		
-		HTMLTable table = new HTMLTable();
-		
-		Covid19SpreadingFile line = new Covid19SpreadingFile("7h","ola", "sou", "a", "Joana");
-		Covid19SpreadingFile line2 = new Covid19SpreadingFile("9h","ola", "sou", "a", "Joana");
-		
-		List<Covid19SpreadingFile> lista = new ArrayList<Covid19SpreadingFile>();
-		lista.add(line);
-		lista.add(line2);
-		
-		try {
-			table.updateHTMLFile(new File("tableCovid.html"), lista);
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		}		
 	}
 }
