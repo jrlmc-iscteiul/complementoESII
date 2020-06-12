@@ -11,12 +11,12 @@ public class HTMLTable {
 	
 	public String createLine(Covid19SpreadingFile file) {
 		StringBuilder sb = new StringBuilder();
-				
-		sb.append("<td class=\"tg-0lax\">" + file.getFileTimestamp() + "</td> \n");
+		
+		sb.append("<td class=\"tg-0lax\">" + file.getFileTimestamp() + "</td>");
 		sb.append("<td class=\"tg-0lax\">" + file.getFileName() + "</td> \n");
 		sb.append("<td class=\"tg-0lax\">" + file.getFileTag() + "</td> \n");
 		sb.append("<td class=\"tg-0lax\">" + file.getTagDescription() + "</td> \n");
-		sb.append("<td class=\"tg-0lax\">" + file.getSpreadVisualizationLink() + "</td> \n");
+		sb.append("<td class=\"tg-0lax\"><a href=\"" + file.getSpreadVisualizationLink() + "\">Covid19Spreading</a></td> \n");
 		
 		 return sb.toString();
 	}
@@ -42,11 +42,11 @@ public class HTMLTable {
 		        	for (Covid19SpreadingFile elementOFList : list) {
 		        		pw.print("<tr> \n");
 						pw.println(createLine(elementOFList));
-						pw.println("</tr> \n");
+						pw.println("</tr>");
 					}
 		        
-		        	pw.println("</tbody> \n");
-		        	pw.println("</table> \n");
+		        	pw.println("</tbody>");
+		        	pw.println("</table>");
 		        	
 		        	break;
 		        }		    

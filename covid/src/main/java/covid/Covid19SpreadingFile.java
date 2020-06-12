@@ -1,5 +1,7 @@
 package covid;
 
+import java.net.URL;
+
 public class Covid19SpreadingFile {
 	
 	private String fileTimestamp;
