@@ -58,9 +58,10 @@ public class GetDataFromGit {
                      if (!treeWalk.next()) 
                          throw new IllegalStateException("Did not find expected file 'covid19spreading.rdf'");
                                           
-                     String url = new String("http://visualdataweb.de/webvowl/#iri=https://github.com/vbasto-iscte/ESII1920/raw/master/covid19spreading.rdf");
-                     
-                     listCovid19SpreadingFile.add(new Covid19SpreadingFile(commit.getAuthorIdent().getWhen().toLocaleString().toString(),"covid19spreading.rdf", ref.getName().replace("refs/tags/", ""), commit.getFullMessage(), url));
+                     String tag = new String(ref.getName().replace("refs/tags/", ""));                     
+                     String url = new String("http://visualdataweb.de/webvowl/#iri=https://github.com/vbasto-iscte/ESII1920/raw/" + tag + "/covid19spreading.rdf");
+                                          
+                     listCovid19SpreadingFile.add(new Covid19SpreadingFile(commit.getAuthorIdent().getWhen().toLocaleString().toString(),"covid19spreading.rdf", tag, commit.getFullMessage(), url));
                      
                      table.updateHTMLFile(new File("tableCovid.html"), listCovid19SpreadingFile);  
                  }

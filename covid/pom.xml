@@ -4,6 +4,10 @@
   <artifactId>covid</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <properties>
+  	<junit.jupiter.version>5.5.2</junit.jupiter.version>
+  </properties>
+  
   <dependencies>
 	<!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->
 	<dependency>
@@ -16,6 +20,20 @@
 	  <groupId>org.slf4j</groupId>
 	  <artifactId>slf4j-simple</artifactId>
 	  <version>1.7.21</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-engine</artifactId>
+		<version>${junit.jupiter.version}</version>
+		<scope>test</scope>
+	</dependency>
+		    
+	<dependency>
+	    <groupId>org.junit.jupiter</groupId>
+	    <artifactId>junit-jupiter-api</artifactId>
+	    <version>${junit.jupiter.version}</version>
+	    <scope>test</scope>
 	</dependency>
   </dependencies>
   
