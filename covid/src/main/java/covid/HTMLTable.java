@@ -1,68 +1,83 @@
 package covid;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.Scanner;
 
+/**
+ * The Class HTMLTable
+ * 
+ * @author Joana Cavalheiro
+ * @since 10/06/2020
+ * 
+ */
 public class HTMLTable {
+
+	public static String title = "<p style=\"text-align:center;font-size:160%;\"><strong>Tags do ficheiro covid19spreading.rdf no GitHub</strong></p>";
+	public static String style = "<style type=\"text/css\">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;  overflow:hidden;padding:10px 5px;word-break:normal;}.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}.tg .tg-fkac{background-color:#ffce93;font-size:12px;text-align:center;vertical-align:top}.tg .tg-wus8{background-color:#ffce93;border-color:inherit;color:#000000;font-size:12px;font-style:italic;text-align:center;  vertical-align:top}.tg .tg-ltnr{background-color:#ffce93;border-color:inherit;color:#000000;font-size:12px;text-align:center;vertical-align:top}.tg .tg-0lax{text-align:left;vertical-align:top}.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}</style>";
+	public static String headerTable = "<table class=\"tg\" style=\"undefined;table-layout: fixed; width: 751px\">"
+			+ "	<colgroup>" 
+			+ "<col style=\"width: 280px\">"
+			+ "<col style=\"width: 280px\">"
+			+ "<col style=\"width: 280px\">"
+			+ "<col style=\"width: 380px\">"
+			+ "<col style=\"width: 280px\">"
+			+ "</colgroup>"
+			+ "	<thead>"
+			+ "<tr>"
+			+ "<th class=\"tg-fkac\">File Timestamp</th>"
+			+ "<th class=\"tg-wus8\">File Name</th>"
+			+ "<th class=\"tg-ltnr\">File Tag</th>"
+			+ "<th class=\"tg-ltnr\">Tag Description</th>"
+			+ "<th class=\"tg-ltnr\">Spread Visualization Link</th></tr>"
+			+ "	</thead>"
+			+ "<tbody>";
+	public static String finalBody = "</tbody>";
+	public static String finalTable = "</table>";
 	
+	/**
+	 * Creates the part corresponding to each row of the html table
+	 *
+	 * @param file object of Covid19SpreadingFile
+	 * @return the string that corresponds to the html table row
+	 */
 	public String createLine(Covid19SpreadingFile file) {
 		StringBuilder sb = new StringBuilder();
-		
+
+		sb.append("<tr> \n");
 		sb.append("<td class=\"tg-0lax\">" + file.getFileTimestamp() + "</td>");
 		sb.append("<td class=\"tg-0lax\">" + file.getFileName() + "</td> \n");
 		sb.append("<td class=\"tg-0lax\">" + file.getFileTag() + "</td> \n");
 		sb.append("<td class=\"tg-0lax\">" + file.getTagDescription() + "</td> \n");
-		sb.append("<td class=\"tg-0lax\"><a href=\"" + file.getSpreadVisualizationLink() + "\">Covid19Spreading</a></td> \n");
-		
-		 return sb.toString();
+		sb.append("<td class=\"tg-0lax\"><a href=\"" + file.getSpreadVisualizationLink()
+				+ "\">Covid19Spreading</a></td> \n");
+		sb.append("</tr> \n");
+
+		return sb.toString();
 	}
-		
-	public void updateHTMLFile(File sourceFile, List<Covid19SpreadingFile> list) throws IOException {
-		
-		File destFile = new File("tableCovid2.html");
-				
-		try {
-			Scanner sc = new Scanner(sourceFile);
-			
-			FileWriter fw = new FileWriter(destFile);
-			PrintWriter pw = new PrintWriter(fw);
-			
-			while (sc.hasNextLine()) {
-				
-		        String line = sc.nextLine();
-		        
-		        if(line.contains("<tbody>")) {
-		        	pw.println(line);
-		        	
-		        	
-		        	for (Covid19SpreadingFile elementOFList : list) {
-		        		pw.print("<tr> \n");
-						pw.println(createLine(elementOFList));
-						pw.println("</tr>");
-					}
-		        
-		        	pw.println("</tbody>");
-		        	pw.println("</table>");
-		        	
-		        	break;
-		        }		    
-		        
-		        pw.println(line);
-			}
-		    
-			sc.close();
-			pw.flush();
-			pw.close();
-			
-			sourceFile.delete();
-			destFile.renameTo(new File("tableCovid.html"));
-			
-		} catch (IOException ioe) {
-			System.out.println(ioe);
-		}		
+
+	/**
+	 * Update HTML file.
+	 *
+	 * @param sourceFile the source file
+	 * @param list       the list
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public String createHtmlString(List<Covid19SpreadingFile> list){
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(title);
+		sb.append(style);
+		sb.append(headerTable);
+
+		for (Covid19SpreadingFile elementOFList : list) 
+			sb.append(createLine(elementOFList));
+
+		sb.append(finalBody);
+		sb.append(finalTable);
+
+	return sb.toString();
 	}
 }
+
