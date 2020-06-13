@@ -47,7 +47,7 @@ public class GetDataFromGit {
 	public String useGitRepository() throws InvalidRemoteException, TransportException, GitAPIException, IOException {
 
 		Git git;
-		File file = new File("c:/Users/ASUS/Documents/wordpress/cgi-bin/cloneESII");
+		File file = new File("cloneESII");
 	 
 		String tableString = null;
 
