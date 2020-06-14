@@ -63,13 +63,14 @@ public class GetDataFromGit {
 
 		List<Ref> listTags = git.tagList().call();
 		List<Covid19SpreadingFile> listCovid19SpreadingFile = new ArrayList<Covid19SpreadingFile>();
+		
 
 		for (Ref ref : listTags) {
 		//	System.out.println("Tag: " + ref.getName());
 			ObjectId tagFile = repository.resolve(ref.getName());
 
 			try (RevWalk revWalk = new RevWalk(repository)) {
-
+				
 				RevCommit commit = revWalk.parseCommit(tagFile);
 				RevTree tree = commit.getTree();
 				
