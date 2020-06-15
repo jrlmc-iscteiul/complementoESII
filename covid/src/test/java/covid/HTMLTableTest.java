@@ -12,20 +12,47 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HTMLTableTest.
+ */
 class HTMLTableTest {
+	
+	/** The covid file. */
 	Covid19SpreadingFile covidFile;
+	
+	/** The table. */
 	HTMLTable table;
+	
+	/** The file. */
 	File file;
+	
+	/** The list covids. */
 	List<Covid19SpreadingFile> listCovids;
 
+	/**
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
 
+	/**
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 		covidFile = new Covid19SpreadingFile("26/mai/2020", "covid19spreading.rdf", "NovoSurto", "Detetado novo surto",
@@ -37,6 +64,9 @@ class HTMLTableTest {
 
 	}
 
+	/**
+	 * Test create line.
+	 */
 	@Test
 	void testCreateLine() {
 
@@ -49,6 +79,9 @@ class HTMLTableTest {
 		assertEquals(expected, table.createLine(covidFile));
 	}
 
+	/**
+	 * Testcreate html string.
+	 */
 	@Test
 	void testcreateHtmlString() {
 

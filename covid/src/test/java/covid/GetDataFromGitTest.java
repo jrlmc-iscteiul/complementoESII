@@ -13,31 +13,50 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GetDataFromGitTest.
+ */
 class GetDataFromGitTest {
+	
+	/** The get data from git. */
 	GetDataFromGit getDataFromGit;
 	/*Covid19SpreadingFile covidFile;
 	HTMLTable table;
 	File file;
 	List<Covid19SpreadingFile> listCovids;*/
 
+	/**
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
 
+	/**
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 		getDataFromGit = new GetDataFromGit();
-		/*table = new HTMLTable();
-		file = new File("tableCovidTests.html");
-		covidFile = new Covid19SpreadingFile("26/mai/2020", "covid19spreading.rdf", "NovoSurto", "Detetado novo surto", "http://visualdataweb.de/webvowl/#iri=https://github.com/vbasto-iscte/ESII1920/raw/NovoSurto/covid19spreading.rdf");	
-		listCovids = new ArrayList<Covid19SpreadingFile>();
-		listCovids.add(covidFile); */
 	}
 
+	/**
+	 * Test use git rpository.
+	 */
 	@Test
 	void testUseGitRpository() {
 		String actual = null;
@@ -75,9 +94,12 @@ class GetDataFromGitTest {
 		assertEquals(expected, actual);
 	}
 	
+	/**
+	 * Test main.
+	 */
 	@Test
 	void testMain() {
-		
+		getDataFromGit.main(null);		
 	}
 
 }

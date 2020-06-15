@@ -17,12 +17,12 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.TreeWalk;
 import org.eclipse.jgit.treewalk.filter.PathFilter;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
- * The Class GetDataFromGit
+ * The Class GetDataFromGit.
+ *
  * @author Joana Cavalheiro
  * @since 13/06/2020
- * 
  */
 public class GetDataFromGit {
 
